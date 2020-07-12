@@ -1,9 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import App from './router/Router'
+
 ReactDOM.render(
   <React.StrictMode>
-    <div>Olá</div>
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );
