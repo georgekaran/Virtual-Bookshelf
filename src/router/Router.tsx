@@ -5,12 +5,14 @@ import {
   Route
 } from "react-router-dom"
 
-import Home from '../pages/Home'
-import Category from '../pages/Category'
+import Home from '../pages/Home/HomeView'
+import Category from '../pages/Category/CategoryView'
+import Header from '../components/Header/Header'
 
 export default function Router() {
   return (
     <BrowserRouter>
+      <Header />
       <Switch>
           <Route exact path="/">
             <Home />
