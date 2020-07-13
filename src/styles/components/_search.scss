@@ -1,0 +1,15 @@
+.Search__Container {
+  padding: 30px;
+  background: #713BDB;
+  display: flex;
+  border-radius: 8px;
+
+  & {
+    h3 {
+      font-style: normal;
+      font-weight: bold;
+      font-size: 32px;
+      color: white;
+    }
+  }
+}
