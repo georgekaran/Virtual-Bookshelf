@@ -1,11 +1,8 @@
-import './Header.scss'
+import './Header.scss';
 
-import React from 'react'
+import React from 'react';
+import { Box } from '@material-ui/core';
 
 export default function Header() {
-  return (
-    <header className="App__Header">
-      
-    </header>
-  )
+  return <Box className="App__Header" component="header" boxShadow={3}></Box>;
 }
