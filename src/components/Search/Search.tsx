@@ -1,8 +1,6 @@
 import React, { ChangeEvent } from 'react';
 
-import Grid from '@material-ui/core/Grid';
-import Input from '@material-ui/core/Input';
-import InputAdornment from '@material-ui/core/InputAdornment';
+import { Grid, Input, InputAdornment } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 
 import searchImage from '../../assets/images/search-image.svg';

@@ -1,6 +1,5 @@
 import React from 'react';
-import Box from '@material-ui/core/Box';
-import Button from '@material-ui/core/Button';
+import { Box, Button } from '@material-ui/core';
 
 export default function Header() {
   return (

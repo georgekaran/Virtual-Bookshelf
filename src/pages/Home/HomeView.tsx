@@ -1,6 +1,5 @@
 import React from 'react';
-import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
+import { Container, Grid } from '@material-ui/core';
 
 import Search from '../../components/Search/Search';
 import BookList from '../../components/BookList/BookList';
