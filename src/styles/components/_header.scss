@@ -3,4 +3,20 @@
   height: 60px;
   left: 0px;
   top: 0px;
+  display: flex;
+  justify-content: space-between;
+
+  & {
+
+    .ActionsWrapper {
+      display: flex;
+      align-items: center;
+    
+      & .Avatar {
+        height: 50px;
+        width: 50px;
+        margin: 0 16px;
+      }
+    }
+  }
 }
