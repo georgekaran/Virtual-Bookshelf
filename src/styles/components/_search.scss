@@ -1,6 +1,6 @@
 .Search__Container {
   padding: 30px;
-  background: #713BDB;
+  background: #713bdb;
   display: flex;
   border-radius: 8px;
 
@@ -10,6 +10,34 @@
       font-weight: bold;
       font-size: 32px;
       color: white;
+      margin-bottom: 20px;
     }
+
+    .Search__Input {
+      background: white;
+      border-radius: 12px;
+      padding: 10px;
+      width: 100%;
+
+      & > input {
+        border-radius: 12px;
+        color: #383838;
+      }
+    }
+
+    .Image__Wrapper {
+      justify-content: center;
+      display: flex;
+
+      & img {
+        height: 200px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 960px) {
+  .Search__Container .Image__Wrapper {
+    display: none !important;
   }
 }
