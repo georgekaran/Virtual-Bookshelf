@@ -40,6 +40,9 @@ export default function BookList({ title }: BookListProps) {
         <Grid item xs>
           <BookCard />
         </Grid>
+        <Grid item xs>
+          <BookCard />
+        </Grid>
       </Grid>
     </Box>
   );
