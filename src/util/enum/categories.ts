@@ -1,6 +1,9 @@
 import { Category } from '../../protocols'
 
 const categories: Category[] = [{
+  name: 'others',
+  title: 'Outros livros'
+}, {
   name: 'reading',
   title: 'Lendo'
 }, {
