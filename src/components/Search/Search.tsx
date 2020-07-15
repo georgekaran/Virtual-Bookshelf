@@ -5,7 +5,11 @@ import SearchIcon from '@material-ui/icons/Search';
 
 import searchImage from '../../assets/images/search-image.svg';
 
-export default function Search() {
+interface SearchProps {
+  title: string;
+}
+
+export default function Search({ title }: SearchProps) {
 
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
     // TODO
@@ -14,7 +18,7 @@ export default function Search() {
   return (
     <Grid className="Search__Container" item xs={12}>
       <Grid item xs>
-        <h3>Encontre os melhores livros em cada categoria</h3>
+        <h3>{title}</h3>
         <Input
           className="Search__Input"
           placeholder="Busque por livros"

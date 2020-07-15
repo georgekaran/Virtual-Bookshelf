@@ -1,0 +1,22 @@
+.Base__Container {
+  &.others {
+    & .Search__Container {
+      background: #3BBEDB;
+    }
+  }
+  &.reading {
+    & .Search__Container {
+      background: #3B55DB;
+    }
+  }
+  &.wantToRead {
+    & .Search__Container {
+      background: #B13BDB;
+    }
+  }
+  &.read {
+    & .Search__Container {
+      background: #D83BDB;
+    }
+  }
+}
