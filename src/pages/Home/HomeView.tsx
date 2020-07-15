@@ -13,12 +13,9 @@ export default function Home() {
     <Container fixed className="Base__Container">
       <Grid item xs={12}>
         <Search />
-        <BookList title="Outros Livros" 
-                  category="others" />
         {categories.map((category) => (
-          <BookList key={category.name} 
-                    title={category.title} 
-                    category={category.name} />
+          <BookList key={category.name}
+                    category={category} />
         ))}
       </Grid>
     </Container>

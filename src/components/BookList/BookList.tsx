@@ -4,26 +4,27 @@ import { Grid, Box, Typography, Button } from '@material-ui/core';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 
 import BookCard from './BookCard/BookCard';
+import { Category } from '../../protocols';
 
 interface BookListProps {
-  title: string;
-  category?: string | null;
+  category: Category;
+  showButtonMore?: boolean
 }
 
-export default function BookList({ title, category = null }: BookListProps) {
+export default function BookList({ category, showButtonMore = true }: BookListProps) {
   let history = useHistory();
 
   const handleSeeMoreClick = () => {
-    history.push(`/category/${category}`);
+    history.push(`/category/${category.name}`);
   };
 
   return (
     <Box className="BookList" component="div" marginY={3}>
       <Box className="BookList__Header">
         <Typography className="Title" component="h4">
-          {title}
+          {category.title}
         </Typography>
-        {category && (
+        {showButtonMore && (
           <Button endIcon={<ArrowForwardIcon />} 
                   color="primary"
                   onClick={handleSeeMoreClick}>

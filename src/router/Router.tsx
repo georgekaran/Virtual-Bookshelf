@@ -17,7 +17,7 @@ export default function Router() {
           <Route exact path="/">
             <Home />
           </Route>
-          <Route path="/category/:name">
+          <Route path="/category/:categoryName">
             <Category />
           </Route>
         </Switch>
