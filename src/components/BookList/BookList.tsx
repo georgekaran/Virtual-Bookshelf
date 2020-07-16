@@ -8,10 +8,11 @@ import { Category } from '../../protocols';
 
 interface BookListProps {
   category: Category;
-  showButtonMore?: boolean
+  showButtonMore?: boolean;
+  limit?: number;
 }
 
-export default function BookList({ category, showButtonMore = true }: BookListProps) {
+export default function BookList({ category, showButtonMore = true, limit = -1 }: BookListProps) {
   let history = useHistory();
 
   const handleSeeMoreClick = () => {
@@ -25,9 +26,7 @@ export default function BookList({ category, showButtonMore = true }: BookListPr
           {category.title}
         </Typography>
         {showButtonMore && (
-          <Button endIcon={<ArrowForwardIcon />} 
-                  color="primary"
-                  onClick={handleSeeMoreClick}>
+          <Button endIcon={<ArrowForwardIcon />} color="primary" onClick={handleSeeMoreClick}>
             Ver mais
           </Button>
         )}

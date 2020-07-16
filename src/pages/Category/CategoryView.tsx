@@ -42,7 +42,7 @@ export default function CategoryView() {
           <>
             <Search title={title} />
             <BookList category={category}
-                    showButtonMore={false} />
+                      showButtonMore={false} />
           </>
         )}
       </Grid>

@@ -15,7 +15,8 @@ export default function Home() {
         <Search title={"Encontre os melhores livros em cada categoria"} />
         {categories.map((category) => (
           <BookList key={category.name}
-                    category={category} />
+                    category={category}
+                    limit={6} />
         ))}
       </Grid>
     </Container>
