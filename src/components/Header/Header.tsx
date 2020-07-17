@@ -1,10 +1,15 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { Box, Button, Divider, Avatar } from '@material-ui/core';
 
 import userAvatar from '../../assets/images/user-avatar.jpg';
 
 export default function Header() {
-  // TODO: Get user info
+  const history = useHistory();
+
+  const handleNewBookClick = () => {
+    history.push('/book');
+  }
 
   return (
     <>
@@ -16,7 +21,8 @@ export default function Header() {
 
           </Box>
           <Box className="ActionsWrapper">
-            <Button className="BtnPrimary">
+            <Button className="BtnPrimary" 
+                    onClick={handleNewBookClick}>
               Adicionar livro
             </Button>
             <Avatar className="Avatar" 
