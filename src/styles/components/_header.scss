@@ -12,10 +12,15 @@
       display: flex;
       align-items: center;
 
-      & .Avatar {
-        height: 50px;
-        width: 50px;
-        margin: 0 16px;
+      & {
+        .BtnPrimary {
+          border-radius: 24px !important;
+        }
+        .Avatar {
+          height: 50px;
+          width: 50px;
+          margin: 0 16px;
+        }
       }
     }
   }

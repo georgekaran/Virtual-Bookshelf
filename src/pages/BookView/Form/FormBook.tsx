@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers';
-import { Container, Grid, Box, Typography } from '@material-ui/core';
+import { Container, Grid, Box, Typography, Button } from '@material-ui/core';
 
 import Dropzone from '../../../components/Dropzone/Dropzone';
 import Input from '../../../components/Form/Input/Input';
@@ -26,18 +26,27 @@ export default function FormBook() {
   return (
     <Container fixed className={`Form__Container`}>
       <Grid item xs={12}>
-        <Box className="Box">
-          <Typography variant="h4" component="h4">
-            Cadastro de livro
-          </Typography>
-          <Dropzone onFileUploaded={setImage} />
-          <form onSubmit={form.handleSubmit(handleSubmit)}>
-            <Input label="Título" name="title" form={form} />
-            <Input label="Autor" name="author" form={form} />
-            <Input label="Descrição" name="description" form={form} />
-            <button type="submit">Salvar</button>
-          </form>
-        </Box>
+        <form onSubmit={form.handleSubmit(handleSubmit)}>
+          <Box className="Box">
+            <Typography variant="h4" component="h4">
+              Cadastro de livro
+            </Typography>
+            <Dropzone onFileUploaded={setImage} />
+            <Input label="Título" 
+                   name="title" 
+                   form={form} />
+            <Input label="Autor" 
+                   name="author" 
+                   form={form} />
+            <Input label="Descrição" 
+                   name="description" 
+                   form={form} />
+            <Button className="BtnPrimary"
+                    type="submit">
+              Salvar
+            </Button>
+          </Box>
+        </form>
       </Grid>
     </Container>
   );
