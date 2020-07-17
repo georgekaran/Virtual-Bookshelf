@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Container, Grid, Box, Typography } from '@material-ui/core'
 
 import Dropzone from '../../../components/Dropzone/Dropzone';
+import Input from '../../../components/Form/Input/Input';
 
 export default function FormBook() {
   const [image, setImage] = useState<File>();
@@ -14,6 +15,7 @@ export default function FormBook() {
             Cadastro de livro
           </Typography>
           <Dropzone onFileUploaded={setImage} />
+          <Input label="Título" name="title" />
         </Box>
       </Grid>
     </Container>
