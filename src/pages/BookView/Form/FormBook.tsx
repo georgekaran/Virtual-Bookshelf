@@ -1,11 +1,27 @@
-import React, { useState } from 'react'
-import { Container, Grid, Box, Typography } from '@material-ui/core'
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import * as Yup from 'yup';
+import { yupResolver } from '@hookform/resolvers';
+import { Container, Grid, Box, Typography } from '@material-ui/core';
 
 import Dropzone from '../../../components/Dropzone/Dropzone';
 import Input from '../../../components/Form/Input/Input';
 
+const FormBookSchema = Yup.object().shape({
+  title: Yup.string().required('Required field'),
+  author: Yup.string().required('Required field'),
+  description: Yup.string().required('Required field'),
+});
+
 export default function FormBook() {
+  const form = useForm({
+    resolver: yupResolver(FormBookSchema),
+  });
   const [image, setImage] = useState<File>();
+
+  const handleSubmit = (values: any) => {
+    console.log(values);
+  };
 
   return (
     <Container fixed className={`Form__Container`}>
@@ -15,9 +31,14 @@ export default function FormBook() {
             Cadastro de livro
           </Typography>
           <Dropzone onFileUploaded={setImage} />
-          <Input label="Título" name="title" />
+          <form onSubmit={form.handleSubmit(handleSubmit)}>
+            <Input label="Título" name="title" form={form} />
+            <Input label="Autor" name="author" form={form} />
+            <Input label="Descrição" name="description" form={form} />
+            <button type="submit">Salvar</button>
+          </form>
         </Box>
       </Grid>
     </Container>
-  )
+  );
 }
