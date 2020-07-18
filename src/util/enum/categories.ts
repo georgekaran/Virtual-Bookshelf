@@ -1,6 +1,6 @@
 import { Category } from '../../protocols'
 
-const categories: Category[] = [{
+export const categories: Category[] = [{
   name: 'others',
   title: 'Outros livros'
 }, {
@@ -13,5 +13,10 @@ const categories: Category[] = [{
   name: 'read',
   title: 'Lidos'
 }]
+
+export const categoriesOptions = categories.map(c => ({
+  value: c.name,
+  label: c.title
+}))
 
 export default categories
