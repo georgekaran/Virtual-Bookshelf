@@ -1,14 +1,19 @@
 .Form__Container {
   & {
+    form {
+      display: flex;
+      justify-content: center;
+    }
     .Box {
       display: flex;
       flex-direction: column;
       align-items: center;
       margin: 24px 0;
+      width: 100%;
+      max-width: 500px;
     }
     h4 {
       font-weight: bold;
-      font-size: 36px;
       color: #5B5B5B;
     }
   }

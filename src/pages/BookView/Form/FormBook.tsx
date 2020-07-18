@@ -6,18 +6,22 @@ import { Container, Grid, Box, Typography, Button } from '@material-ui/core';
 
 import Dropzone from '../../../components/Dropzone/Dropzone';
 import Input from '../../../components/Form/Input/Input';
+import Select from '../../../components/Form/Select/Select';
+import { categoriesOptions } from '../../../util/enum/categories';
 
 const FormBookSchema = Yup.object().shape({
   title: Yup.string().required('Required field'),
   author: Yup.string().required('Required field'),
   description: Yup.string().required('Required field'),
+  category: Yup.string().required('Required field')
 });
 
 export default function FormBook() {
+  const [image, setImage] = useState<File>();
+
   const form = useForm({
     resolver: yupResolver(FormBookSchema),
   });
-  const [image, setImage] = useState<File>();
 
   const handleSubmit = (values: any) => {
     console.log(values);
@@ -32,20 +36,17 @@ export default function FormBook() {
               Cadastro de livro
             </Typography>
             <Dropzone onFileUploaded={setImage} />
-            <Input label="Título" 
-                   name="title" 
-                   form={form} />
-            <Input label="Autor" 
-                   name="author"
-                   fullWidth 
-                   form={form} />
-            <Input label="Descrição" 
-                   name="description" 
-                   form={form} />
-            <Button className="BtnPrimary"
-                    type="submit">
-              Salvar
-            </Button>
+            <Input label="Título" name="title" form={form} />
+            <Input label="Autor" name="author" fullWidth form={form} />
+            <Select label="Categoria" name="category" form={form} options={categoriesOptions} />
+            <Input label="Descrição" name="description" form={form} />
+            <Box display="flex" 
+                 justifyContent="flex-end"
+                 width="100%" >
+              <Button className="BtnPrimary" type="submit">
+                Salvar
+              </Button>
+            </Box>
           </Box>
         </form>
       </Grid>
