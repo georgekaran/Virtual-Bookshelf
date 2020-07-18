@@ -1,6 +1,6 @@
 .Input {
   margin: 12px 0 !important;
-  width: 500px;
+  width: 100%;
 
   & {
     input {
@@ -20,11 +20,5 @@
         margin-top: 24px;
       }
     }
-  }
-}
-
-@media (max-width: 530px) {
-  .Input {
-    width: 300px !important;
   }
 }
