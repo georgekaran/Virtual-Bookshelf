@@ -27,7 +27,7 @@ const Dropzone: React.FC<DropzoneProps> = ({ onFileUploaded }) => {
       ) : (
         <p>
           <Attachment />
-          Imagem do livro
+          Book's image
         </p>
       )}
     </div>

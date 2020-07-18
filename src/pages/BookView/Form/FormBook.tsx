@@ -33,18 +33,18 @@ export default function FormBook() {
         <form onSubmit={form.handleSubmit(handleSubmit)}>
           <Box className="Box">
             <Typography variant="h4" component="h4">
-              Cadastro de livro
+              Add book
             </Typography>
             <Dropzone onFileUploaded={setImage} />
-            <Input label="Título" name="title" form={form} />
-            <Input label="Autor" name="author" fullWidth form={form} />
-            <Select label="Categoria" name="category" form={form} options={categoriesOptions} />
-            <Input label="Descrição" name="description" form={form} />
+            <Input label="Title" name="title" form={form} />
+            <Input label="Author" name="author" fullWidth form={form} />
+            <Select label="Category" name="category" form={form} options={categoriesOptions} />
+            <Input label="Description" name="description" form={form} />
             <Box display="flex" 
                  justifyContent="flex-end"
                  width="100%" >
               <Button className="BtnPrimary" type="submit">
-                Salvar
+                Save
               </Button>
             </Box>
           </Box>
