@@ -7,6 +7,7 @@ interface InputProps {
   label: string;
   name: string;
   form: UseFormMethods;
+  [T: string]: any
 }
 
 const Input: React.FC<InputProps> = ({ label, name, form, ...props }) => {

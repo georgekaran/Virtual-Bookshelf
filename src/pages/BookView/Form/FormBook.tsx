@@ -25,7 +25,7 @@ export default function FormBook() {
 
   return (
     <Container fixed className={`Form__Container`}>
-      <Grid item xs={12}>
+      <Grid item xs>
         <form onSubmit={form.handleSubmit(handleSubmit)}>
           <Box className="Box">
             <Typography variant="h4" component="h4">
@@ -36,7 +36,8 @@ export default function FormBook() {
                    name="title" 
                    form={form} />
             <Input label="Autor" 
-                   name="author" 
+                   name="author"
+                   fullWidth 
                    form={form} />
             <Input label="Descrição" 
                    name="description" 
