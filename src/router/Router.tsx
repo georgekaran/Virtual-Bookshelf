@@ -22,8 +22,11 @@ export default function Router() {
           <Route path="/category/:categoryId">
             <Category />
           </Route>
-          <Route path="/book/:id">
+          <Route path="/book/view/:id">
             <BookView />
+          </Route>
+          <Route path="/book/:id">
+            <FormBook />
           </Route>
           <Route path="/book">
             <FormBook />

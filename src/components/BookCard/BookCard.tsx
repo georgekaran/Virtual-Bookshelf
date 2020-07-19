@@ -15,7 +15,7 @@ const BookCard: React.FC<BookCardProps> = ({ book }) => {
 
   const handleRedirectBookView = (bookId: string | null) => {
     if (bookId) {
-      history.push(`/book/${bookId}`);
+      history.push(`/book/view/${bookId}`);
     }
   };
 
