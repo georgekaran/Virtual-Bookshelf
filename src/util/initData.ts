@@ -4,9 +4,9 @@ import { bookKey, categoryKey, commentsKey } from './consts';
 
 const categoriesDefaultData = [
   {
-    id: '0',
+    id: null,
     name: 'others',
-    title: 'Outros livros',
+    title: 'Sem categoria',
   },
   {
     id: '1',

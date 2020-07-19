@@ -4,7 +4,7 @@ export interface Book {
   title: string
   description: string
   author: string
-  category: number | null
+  category: string | null
   deleted: boolean
   image: string | null
 }

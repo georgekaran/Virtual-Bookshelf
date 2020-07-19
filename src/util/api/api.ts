@@ -19,7 +19,7 @@ const setEndpointData = (key: LocalStorageKeys, data: any) => {
 };
 
 abstract class BaseEndpoint<T extends Entity> implements Endpoint<T> {
-  constructor(private key: LocalStorageKeys) {}
+  constructor(protected key: LocalStorageKeys) {}
 
   find(id: string) {
     let data = getEndpointData(this.key);
@@ -65,6 +65,10 @@ class CategoryRepository extends BaseEndpoint<Category> {
 class BookRepository extends BaseEndpoint<Book> {
   constructor() {
     super(bookKey)
+  }
+
+  findByCategory(categoryId: string | null): Book[] {
+    return this.findAll().filter(book => book.category === categoryId)
   }
 }
 
