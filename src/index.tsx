@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
 
 import App from './router/Router'
+import { initDataApi } from './util/initData';
 
 const theme = createMuiTheme({
   palette: {
@@ -16,6 +17,8 @@ const theme = createMuiTheme({
     }
   },
 });
+
+initDataApi();
 
 ReactDOM.render(
   <React.StrictMode>
