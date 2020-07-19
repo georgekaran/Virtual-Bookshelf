@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { Typography, Paper, Box } from '@material-ui/core';
 import Skeleton from '@material-ui/lab/Skeleton';
 
+import noImageSvg from '../../assets/images/no-image.svg';
 import { Book } from '../../protocols';
 
 interface BookCardProps {
@@ -26,7 +27,7 @@ const BookCard: React.FC<BookCardProps> = ({ book }) => {
     <Paper className={`BookCard ${!isTruthyBook() ? 'Disable' : ''}`} elevation={2} onClick={() => handleRedirectBookView(isTruthyBook() ? book!.id : null)}>
       {book ? (
         <>
-          <img src={book.image || ''} alt="Book Cover" />
+          <img src={book.image || noImageSvg} alt="Book Cover" />
           <div className="InfoWrapper">
             <Typography className="Title" component="label">
               {book.title}
