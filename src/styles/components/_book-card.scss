@@ -15,7 +15,12 @@
 
     img {
       width: 100%;
-      min-width: 100px;
+    }
+
+    .Skeleton {
+      & > .Image {
+        height: calc(100% - 40px);
+      }
     }
 
     .InfoWrapper {
@@ -39,5 +44,23 @@
         }
       }
     }
+  }
+}
+
+@media (max-width: 959px) {
+  .BookCard .Skeleton {
+    height: 170px;
+  }
+}
+
+@media (min-width: 960px) {
+  .BookCard .Skeleton {
+    height: 170px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .BookCard .Skeleton {
+    height: 220px;
   }
 }
