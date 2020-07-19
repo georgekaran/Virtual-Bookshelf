@@ -2,7 +2,7 @@ import isEmpty from 'lodash/isEmpty';
 
 import { Category, Entity, Endpoint, Book } from '../../protocols';
 import { initDataApi } from '../initData';
-import { categoryKey, bookKey } from '../enum/consts';
+import { categoryKey, bookKey } from '../consts';
 
 type LocalStorageKeys = '_virtual_bookshelf_category' | '_virtual_bookshelf_book' | '_virtual_bookshelf_comments';
 

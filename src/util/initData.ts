@@ -1,6 +1,6 @@
 import isEmpty from 'lodash/isEmpty';
 
-import { bookKey, categoryKey, commentsKey } from './enum/consts';
+import { bookKey, categoryKey, commentsKey } from './consts';
 
 const categoriesDefaultData = [
   {
