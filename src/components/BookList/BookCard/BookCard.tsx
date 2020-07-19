@@ -2,24 +2,30 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { Typography, Paper } from '@material-ui/core';
 
-const BookCard = () => {
+import { Book } from '../../../protocols';
+
+interface BookCardProps {
+  book: Book
+}
+
+const BookCard: React.FC<BookCardProps> = ({ book }) => {
   const history = useHistory();
 
-  const handleRedirectBookView = (bookId: number) => {
+  const handleRedirectBookView = (bookId: string) => {
     history.push(`/book/${bookId}`);
   }
 
   return (
     <Paper className="BookCard" 
            elevation={2} 
-           onClick={() => handleRedirectBookView(1)}>
-      <img src="https://s26162.pcdn.co/wp-content/uploads/2018/12/81A9dFqIEEL.jpg" alt="Book Cover" />
+           onClick={() => handleRedirectBookView(book.id)}>
+      <img src={book.image || ""} alt="Book Cover" />
       <div className="InfoWrapper">
         <Typography className="Title" component="label">
-          Lorem ipsum dolor
+          {book.title}
         </Typography>
         <Typography className="Author" component="label">
-          Lorem ipsum dolor
+          {book.author}
         </Typography>
       </div>
     </Paper>

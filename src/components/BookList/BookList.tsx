@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Grid, Box, Typography, Button } from '@material-ui/core';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 
 import BookCard from './BookCard/BookCard';
-import { Category } from '../../protocols';
+import { Category, Book } from '../../protocols';
+import Api from '../../util/api/api';
 
 interface BookListProps {
   category: Category;
@@ -13,7 +14,19 @@ interface BookListProps {
 }
 
 export default function BookList({ category, showButtonMore = true, limit = -1 }: BookListProps) {
+  const [books, setBooks] = useState<Book[]>();
   let history = useHistory();
+
+  const fetchBooks = () => {
+    const booksCategory = Api.Book.findByCategory(category.id);
+    setBooks(booksCategory);
+  };
+
+  useEffect(fetchBooks, [category]);
+
+  useEffect(() => {
+    console.log(books);
+  }, [books]);
 
   const handleSeeMoreClick = () => {
     history.push(`/category/${category.id}`);
@@ -32,24 +45,11 @@ export default function BookList({ category, showButtonMore = true, limit = -1 }
         )}
       </Box>
       <Grid container spacing={3}>
-        <Grid item xs>
-          <BookCard />
-        </Grid>
-        <Grid item xs>
-          <BookCard />
-        </Grid>
-        <Grid item xs>
-          <BookCard />
-        </Grid>
-        <Grid item xs>
-          <BookCard />
-        </Grid>
-        <Grid item xs>
-          <BookCard />
-        </Grid>
-        <Grid item xs>
-          <BookCard />
-        </Grid>
+        {books?.map((book) => (
+          <Grid item xs={2}>
+            <BookCard book={book} />
+          </Grid>
+        ))}
       </Grid>
     </Box>
   );

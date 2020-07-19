@@ -16,7 +16,7 @@ const FormBookSchema = Yup.object().shape({
   title: Yup.string().required('Required field'),
   author: Yup.string().required('Required field'),
   description: Yup.string().required('Required field'),
-  category: Yup.number().required('Required field')
+  category: Yup.mixed()
 });
 
 export default function FormBook() {
@@ -65,7 +65,12 @@ export default function FormBook() {
             <Dropzone onFileUploaded={setImage} />
             <Input label="Title" name="title" form={form} />
             <Input label="Author" name="author" fullWidth form={form} />
-            <Select label="Category" name="category" form={form} options={categoriesOptions} />
+            <Select label="Category" 
+                    name="category"
+                    displayEmpty 
+                    defaultValue={null}
+                    form={form} 
+                    options={categoriesOptions} />
             <Input label="Description" name="description" form={form} />
             <Box display="flex" 
                  justifyContent="flex-end"

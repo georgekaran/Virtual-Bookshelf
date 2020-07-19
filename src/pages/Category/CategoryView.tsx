@@ -8,7 +8,7 @@ import { Category } from '../../protocols';
 import Api from '../../util/api/api';
 
 export default function CategoryView() {
-  const [category, setCategory] = useState<Category | null>(null)
+  const [category, setCategory] = useState<Category>()
   const [title, setTitle] = useState("")
   const { categoryId } = useParams();
 
@@ -23,17 +23,17 @@ export default function CategoryView() {
 
   useEffect(() => {
     switch (category?.name) {
-      case "others":
-        setTitle("Livros que não estão em nehuma categoria")
-        break;
-        case "read":
+      case "read":
         setTitle("Opa, aqui estão seus livros já lidos.")
         break;
-        case "reading":
+      case "reading":
         setTitle("Estes livros você está lendo no momento.")
         break;
       case "wantToRead":
         setTitle("Abaixo estão os livros que você deseja ler.")
+        break;
+      default:
+          setTitle("Livros que não estão em nehuma categoria")
         break;
     }
   }, [category])
