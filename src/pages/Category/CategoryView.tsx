@@ -4,19 +4,22 @@ import { Container, Grid } from '@material-ui/core';
 
 import Search from '../../components/Search/Search';
 import BookList from '../../components/BookList/BookList';
-import enumCategories from '../../util/enum/categories';
 import { Category } from '../../protocols';
+import Api from '../../util/api/api';
 
 export default function CategoryView() {
   const [category, setCategory] = useState<Category | null>(null)
   const [title, setTitle] = useState("")
-  const { categoryName } = useParams();
+  const { categoryId } = useParams();
 
-  useEffect(() => {
-    const currentCategory = enumCategories.find((c) => c.name === categoryName);
+  const findCategory = () => {
+    const categories = Api.Category.findAll()
+    const currentCategory = categories.find(c => c.id === categoryId);
     if (currentCategory)
       setCategory(currentCategory);
-  }, [categoryName])
+  }
+
+  useEffect(findCategory, [categoryId])
 
   useEffect(() => {
     switch (category?.name) {

@@ -1,13 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Grid } from '@material-ui/core';
 
 import Search from '../../components/Search/Search';
 import BookList from '../../components/BookList/BookList';
-import enumCategories from '../../util/enum/categories';
 import { Category } from '../../protocols';
+import Api from '../../util/api/api';
 
 export default function Home() {
-  const [categories] = useState<Category[]>(enumCategories);
+  const [categories, setCategories] = useState<Category[]>([]);
+
+  const fetchCategories = () => {
+    setCategories(Api.Category.findAll())
+  }
+
+  useEffect(fetchCategories, [])
 
   return (
     <Container fixed className="Base__Container">

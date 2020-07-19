@@ -19,7 +19,7 @@ export default function Router() {
           <Route exact path="/">
             <Home />
           </Route>
-          <Route path="/category/:categoryName">
+          <Route path="/category/:categoryId">
             <Category />
           </Route>
           <Route path="/book/:id">

@@ -16,7 +16,7 @@ export default function BookList({ category, showButtonMore = true, limit = -1 }
   let history = useHistory();
 
   const handleSeeMoreClick = () => {
-    history.push(`/category/${category.name}`);
+    history.push(`/category/${category.id}`);
   };
 
   return (
