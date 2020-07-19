@@ -10,10 +10,11 @@ interface SelectProps {
   label: string;
   name: string;
   form: UseFormMethods;
+  defaultValue?: any
   [T: string]: any;
 }
 
-const Select: React.FC<SelectProps> = ({ label, name, options, form, ...props }) => {
+const Select: React.FC<SelectProps> = ({ label, name, options, form, defaultValue, ...props }) => {
   const { control, errors } = form;
 
   return (
@@ -24,18 +25,20 @@ const Select: React.FC<SelectProps> = ({ label, name, options, form, ...props })
       <Controller
         name={name}
         control={control}
-        as={
+        defaultValue={defaultValue}
+        render={controllerProps => (
           <SelectMUI
             labelId={`${name}-label`}
             disableUnderline
             aria-describedby={`${name}-helper`}
             {...props}
+            {...controllerProps}
           >
-            {options.map(option => (
-              <MenuItem key={option.value} value={option.value}>{option.label}</MenuItem>
+            {options.map((option: Option, idx) => (
+              <MenuItem key={idx} value={option.value}>{option.label}</MenuItem>
             ))}
           </SelectMUI>
-        }
+        )}
       />
       {!isEmpty(errors[name]) && (
         <FormHelperText error id={`${name}-helper`}>{errors[name].message}</FormHelperText>
