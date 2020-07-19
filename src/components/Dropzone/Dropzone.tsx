@@ -17,7 +17,7 @@ const Dropzone: React.FC<DropzoneProps> = ({ onFileUploaded }) => {
     onFileUploaded(file);
   }, [onFileUploaded]);
 
-  const { getRootProps, getInputProps } = useDropzone({ onDrop });
+  const { getRootProps, getInputProps } = useDropzone({ onDrop, accept: 'image/jpeg, image/png' });
 
   return (
     <div className="Dropzone" {...getRootProps()}>
