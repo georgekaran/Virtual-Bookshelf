@@ -3,7 +3,6 @@
   justify-content: center;
   flex-direction: column;
   padding: 10px;
-  cursor: pointer;
   transition-duration: 0.2s !important;
   -webkit-transition-property: transform !important;
   transition-property: transform !important;
@@ -11,6 +10,12 @@
   & {
     &:hover {
       transform: scale(1.05);
+      cursor: pointer;
+    }
+
+    &.Disable:hover {
+      transform: none !important;
+      cursor: default !important;
     }
 
     img {

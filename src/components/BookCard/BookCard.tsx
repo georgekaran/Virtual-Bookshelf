@@ -18,8 +18,12 @@ const BookCard: React.FC<BookCardProps> = ({ book }) => {
     }
   };
 
+  const isTruthyBook = () => {
+    return !!book
+  }
+
   return (
-    <Paper className="BookCard" elevation={2} onClick={() => handleRedirectBookView(book ? book.id : null)}>
+    <Paper className={`BookCard ${!isTruthyBook() ? 'Disable' : ''}`} elevation={2} onClick={() => handleRedirectBookView(isTruthyBook() ? book!.id : null)}>
       {book ? (
         <>
           <img src={book.image || ''} alt="Book Cover" />
