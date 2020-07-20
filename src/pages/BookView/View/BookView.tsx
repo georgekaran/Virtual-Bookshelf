@@ -28,6 +28,7 @@ import Api from '../../../util/api/api';
 import { dataURLToFile } from '../../../util/utils';
 import Select from '../../../components/Form/Select/Select';
 import Comments from '../../../components/Comments/Comments';
+import NewComment from '../../../components/NewComment/NewComment';
 
 interface BookViewHeaderProps {
   handleEditClick: () => void
@@ -163,7 +164,7 @@ export default function BookView() {
                         handleDeleteClick={handleDeleteClick} />
         <Divider />
         {book ? (
-          <Grid container xs className="BookInfo">
+          <Grid container className="BookInfo">
             <Grid className="ImageWrapper" 
                   item 
                   xs={6}>
@@ -201,6 +202,8 @@ export default function BookView() {
             <Grid item xs>
               <Divider />
               <Comments />
+              <Divider />
+              <NewComment />
             </Grid>
           </Grid>
         ) : (
