@@ -1,4 +1,6 @@
-export interface Book {
+import { Entity } from "./entity";
+
+export interface BookModel extends Entity {
   id: string
   timestamp: number
   title: string

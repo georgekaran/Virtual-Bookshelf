@@ -23,7 +23,7 @@ import {
 
 import noImageSvg from '../../../assets/images/no-image.svg';
 import BodyHeader from '../../../components/BodyHeader/BodyHeader';
-import { Book, Category, Option } from '../../../protocols';
+import { BookModel, CategoryModel, Option } from '../../../protocols';
 import Api from '../../../util/api/api';
 import { dataURLToFile } from '../../../util/utils';
 import Select from '../../../components/Form/Select/Select';
@@ -90,8 +90,8 @@ const CategorySchema = Yup.object().shape({
 });
 
 export default function BookView() {
-  const [book, setBook] = useState<Book>();
-  const [category, setCategory] = useState<Category>();
+  const [book, setBook] = useState<BookModel>();
+  const [category, setCategory] = useState<CategoryModel>();
   const [categoriesOptions, setCategoriesOptions] = useState<Option[]>([]);
   const [isCategoryDialogOpen, setCategoryDialogOpen] = useState(false);
 
@@ -111,7 +111,7 @@ export default function BookView() {
 
   const handleCategorySubmit = async (values: any) => {
     if (book) {
-      const bookEdited: Book = {
+      const bookEdited: BookModel = {
         ...book,
         category: values.category
       }

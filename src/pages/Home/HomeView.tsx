@@ -3,11 +3,11 @@ import { Container, Grid } from '@material-ui/core';
 
 import Search from '../../components/Search/Search';
 import BookList from '../../components/BookList/BookList';
-import { Category } from '../../protocols';
+import { CategoryModel } from '../../protocols';
 import Api from '../../util/api/api';
 
 export default function Home() {
-  const [categories, setCategories] = useState<Category[]>([]);
+  const [categories, setCategories] = useState<CategoryModel[]>([]);
 
   const fetchCategories = () => {
     setCategories(Api.Category.findAll())

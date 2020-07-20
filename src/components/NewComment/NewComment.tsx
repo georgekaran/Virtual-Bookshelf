@@ -7,7 +7,7 @@ import { useForm } from 'react-hook-form'
 
 import Input from '../Form/Input/Input'
 import { RootState } from '../../protocols/root-state';
-import { Comment } from '../../protocols';
+import { CommentModel } from '../../protocols';
 import { randomId } from '../../util/utils';
 import Api from '../../util/api/api';
 
@@ -33,7 +33,7 @@ const NewComment: React.FC<NewCommentProps> = ({ bookId }) => {
   const handleSubmit = (values: any) => {
     const { comment } = values
 
-    const commentToSave: Comment = {
+    const commentToSave: CommentModel = {
       id: randomId(),
       parentId: bookId,
       timestamp: Date.now(),

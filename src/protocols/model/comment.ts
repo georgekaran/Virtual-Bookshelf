@@ -1,4 +1,6 @@
-export interface Comment {
+import { Entity } from "./entity";
+
+export interface CommentModel extends Entity {
   id: string
   parentId: string
   timestamp: number

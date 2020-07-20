@@ -4,11 +4,11 @@ import { Container, Grid } from '@material-ui/core';
 
 import Search from '../../components/Search/Search';
 import BookList from '../../components/BookList/BookList';
-import { Category } from '../../protocols';
+import { CategoryModel } from '../../protocols';
 import Api from '../../util/api/api';
 
 export default function CategoryView() {
-  const [category, setCategory] = useState<Category>()
+  const [category, setCategory] = useState<CategoryModel>()
   const [title, setTitle] = useState("")
   const { categoryId } = useParams();
 

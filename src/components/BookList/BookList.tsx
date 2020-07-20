@@ -6,11 +6,11 @@ import { Grid, Box, Typography, Button } from '@material-ui/core';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 
 import BookCard from '../BookCard/BookCard';
-import { Category, Book } from '../../protocols';
+import { CategoryModel, BookModel } from '../../protocols';
 import Api from '../../util/api/api';
 
 interface BookListProps {
-  category: Category;
+  category: CategoryModel;
   showButtonMore?: boolean;
   limit?: number;
 }
@@ -18,7 +18,7 @@ interface BookListProps {
 export default function BookList({ category, showButtonMore = true, limit = -1 }: BookListProps) {
   const { width } = useWindowSize();
   const [limitCards, setLimitCards] = useState(limit);
-  const [books, setBooks] = useState<Book[]>();
+  const [books, setBooks] = useState<BookModel[]>();
   let history = useHistory();
 
   const fetchBooks = () => {

@@ -4,10 +4,10 @@ import { Typography, Paper, Box } from '@material-ui/core';
 import Skeleton from '@material-ui/lab/Skeleton';
 
 import noImageSvg from '../../assets/images/no-image.svg';
-import { Book } from '../../protocols';
+import { BookModel } from '../../protocols';
 
 interface BookCardProps {
-  book: Book | null;
+  book: BookModel | null;
 }
 
 const BookCard: React.FC<BookCardProps> = ({ book }) => {

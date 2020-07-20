@@ -10,7 +10,7 @@ import Input from '../../../components/Form/Input/Input';
 import Select from '../../../components/Form/Select/Select';
 
 import Api from '../../../util/api/api'
-import { Option, Book } from '../../../protocols';
+import { Option, BookModel } from '../../../protocols';
 import { getBase64, randomId, dataURLToFile } from '../../../util/utils';
 
 const FormBookSchema = Yup.object().shape({
@@ -23,7 +23,7 @@ const FormBookSchema = Yup.object().shape({
 export default function FormBook() {
   const [image, setImage] = useState<File>();
   const [categoriesOptions, setCategoriesOptions] = useState<Option[]>([]);
-  const [book, setBook] = useState<Book | null>();
+  const [book, setBook] = useState<BookModel | null>();
 
   const { id } = useParams();
 
@@ -66,7 +66,7 @@ export default function FormBook() {
   useEffect(fetchBookAndUpdateFormValues, [id, reset])
 
   const handleSubmit = async (values: any) => {
-    const book: Book = {
+    const book: BookModel = {
       id: id ? id : randomId(),
       author: values.author,
       category: values.category,

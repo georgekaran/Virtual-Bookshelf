@@ -1,6 +1,6 @@
 import isEmpty from 'lodash/isEmpty';
 
-import { Category, Comment, Entity, Endpoint, Book } from '../../protocols';
+import { CategoryModel, CommentModel, Entity, Endpoint, BookModel } from '../../protocols';
 import { initDataApi } from '../initData';
 import { categoryKey, bookKey, commentsKey } from '../consts';
 
@@ -56,24 +56,24 @@ abstract class BaseEndpoint<T extends Entity> implements Endpoint<T> {
   }
 }
 
-class CategoryRepository extends BaseEndpoint<Category> {
+class CategoryRepository extends BaseEndpoint<CategoryModel> {
   constructor() {
     super(categoryKey)
   }
 }
 
-class CommentRepository extends BaseEndpoint<Comment> {
+class CommentRepository extends BaseEndpoint<CommentModel> {
   constructor() {
     super(commentsKey)
   }
 }
 
-class BookRepository extends BaseEndpoint<Book> {
+class BookRepository extends BaseEndpoint<BookModel> {
   constructor() {
     super(bookKey)
   }
 
-  findByCategory(categoryId: string | null): Book[] {
+  findByCategory(categoryId: string | null): BookModel[] {
     return this.findAll().filter(book => book.category === categoryId)
   }
 }

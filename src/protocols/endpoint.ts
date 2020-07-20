@@ -1,4 +1,4 @@
-import { Entity } from './entity';
+import { Entity } from './model/entity';
 
 export interface Endpoint<T extends Entity> {
   find(id: string): T | null;
