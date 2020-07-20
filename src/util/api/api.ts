@@ -66,6 +66,10 @@ class CommentRepository extends BaseEndpoint<CommentModel> {
   constructor() {
     super(commentsKey)
   }
+
+  findByBook(bookId: string): CommentModel[] {
+    return this.findAll().filter(comment => comment.parentId === bookId)
+  }
 }
 
 class BookRepository extends BaseEndpoint<BookModel> {

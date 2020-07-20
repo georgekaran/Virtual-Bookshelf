@@ -25,7 +25,7 @@ import noImageSvg from '../../../assets/images/no-image.svg';
 import BodyHeader from '../../../components/BodyHeader/BodyHeader';
 import { BookModel, CategoryModel, Option } from '../../../protocols';
 import Api from '../../../util/api/api';
-import { dataURLToFile } from '../../../util/utils';
+import { dataURLToFile, timestampToStringDate } from '../../../util/utils';
 import Select from '../../../components/Form/Select/Select';
 import Comments from '../../../components/Comments/Comments';
 import NewComment from '../../../components/NewComment/NewComment';
@@ -192,7 +192,7 @@ export default function BookView() {
               </Box>
               <Box display="flex" marginY="8px" alignItems="center">
                 <Typography className="Label__Text">Creation date: </Typography>
-                <Typography className="Label__Value">{book.timestamp}</Typography>
+                <Typography className="Label__Value">{timestampToStringDate(book.timestamp)}</Typography>
               </Box>
               <Box display="flex" marginY="8px" alignItems="center">
                 <Typography className="Label__Text">Description: </Typography>
@@ -201,7 +201,7 @@ export default function BookView() {
             </Grid>
             <Grid item xs>
               <Divider />
-              <Comments />
+              <Comments bookId={book.id} />
               <Divider />
               <NewComment bookId={book.id} />
             </Grid>
