@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { MoreVert, Edit, Delete } from '@material-ui/icons';
-import { Container, IconButton, Menu, MenuItem, ListItemIcon, ListItemText } from '@material-ui/core';
+import { Container, IconButton, Menu, MenuItem, ListItemIcon, ListItemText, Grid } from '@material-ui/core';
 
 import BodyHeader from '../../../components/BodyHeader/BodyHeader';
 import { Book } from '../../../protocols';
@@ -31,6 +31,7 @@ export default function BookView() {
 
   return (
     <Container fixed className="Base__Container">
+      <Grid item xs className="BodyView">
         <BodyHeader>
           <IconButton 
             aria-controls="book-actions-menu" 
@@ -61,6 +62,7 @@ export default function BookView() {
             </MenuItem>
           </Menu>
         </BodyHeader>
+      </Grid>
     </Container>
   )
 }
