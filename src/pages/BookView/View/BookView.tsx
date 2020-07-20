@@ -1,13 +1,33 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import * as Yup from 'yup';
+import { yupResolver } from '@hookform/resolvers';
+import { useForm } from 'react-hook-form';
 import { MoreVert, Edit, Delete } from '@material-ui/icons';
-import { Container, IconButton, Menu, MenuItem, ListItemIcon, ListItemText, Grid, Divider, Box, Typography } from '@material-ui/core';
+import { 
+  Container, 
+  IconButton, 
+  Menu, 
+  MenuItem, 
+  ListItemIcon, 
+  ListItemText, 
+  Grid, 
+  Divider, 
+  Box, 
+  Typography, 
+  Dialog, 
+  DialogTitle, 
+  DialogContent, 
+  DialogContentText, 
+  DialogActions, 
+  Button } from '@material-ui/core';
 
 import noImageSvg from '../../../assets/images/no-image.svg';
 import BodyHeader from '../../../components/BodyHeader/BodyHeader';
-import { Book, Category } from '../../../protocols';
+import { Book, Category, Option } from '../../../protocols';
 import Api from '../../../util/api/api';
 import { dataURLToFile } from '../../../util/utils';
+import Select from '../../../components/Form/Select/Select';
 
 interface BookViewHeaderProps {
   handleEditClick: () => void
@@ -64,15 +84,52 @@ const BookViewHeader: React.FC<BookViewHeaderProps> = ({ handleDeleteClick, hand
   )
 }
 
+const CategorySchema = Yup.object().shape({
+  category: Yup.mixed()
+});
+
 export default function BookView() {
   const [book, setBook] = useState<Book>();
   const [category, setCategory] = useState<Category>();
-  const [availableCategorie, setAvailableCategories] = useState<Book>();
+  const [categoriesOptions, setCategoriesOptions] = useState<Option[]>([]);
+  const [isCategoryDialogOpen, setCategoryDialogOpen] = useState(false);
 
   const { id } = useParams();
 
+  const formCategory = useForm({
+    resolver: yupResolver(CategorySchema),
+  });
+
+  const handleCategoryDialogClickOpen = () => {
+    setCategoryDialogOpen(true);
+  };
+
+  const handleCategoryDialogClose = () => {
+    setCategoryDialogOpen(false);
+  };
+
+  const handleCategorySubmit = async (values: any) => {
+    if (book) {
+      const bookEdited: Book = {
+        ...book,
+        category: values.category
+      }
+      Api.Book.save(bookEdited);
+      setBook(bookEdited);
+    }
+  };
+
+  const categoriesToOptions = () => {
+    const categories = Api.Category.findAll();
+    setCategoriesOptions(categories.map(c => ({
+      value: c.id,
+      label: c.title
+    })))
+  }
+
+  useEffect(categoriesToOptions, [])
+
   const handleEditClick = () => {
-    // TODO
   }
 
   const handleDeleteClick = () => {
@@ -128,7 +185,7 @@ export default function BookView() {
               <Box display="flex" marginY="8px" alignItems="center">
                 <Typography className="Label__Text">Category: </Typography>
                 <Typography className="Label__Value">{category && category.title}</Typography>
-                <IconButton>
+                <IconButton onClick={handleCategoryDialogClickOpen}>
                   <Edit fontSize="small" />
                 </IconButton>
               </Box>
@@ -146,6 +203,32 @@ export default function BookView() {
           <h5>Title</h5>
         )}
       </Grid>
+
+      <Dialog open={isCategoryDialogOpen} onClose={handleCategoryDialogClose} aria-labelledby="form-dialog-title">
+        <form onSubmit={formCategory.handleSubmit(handleCategorySubmit)}>
+          <DialogTitle id="form-dialog-title">Change Book Category</DialogTitle>
+          <DialogContent>
+            
+              <Select label="New category" 
+                      name="category"
+                      displayEmpty 
+                      defaultValue={book?.category}
+                      form={formCategory} 
+                      options={categoriesOptions} />
+          </DialogContent>
+          <DialogActions>
+            <Button color="primary" 
+                    onClick={handleCategoryDialogClose}>
+              Cancel
+            </Button>
+            <Button type="submit"
+                    color="primary" 
+                    onClick={handleCategoryDialogClose} >
+              Save
+            </Button>
+          </DialogActions>
+        </form>
+      </Dialog>
     </Container>
   )
 }
