@@ -203,7 +203,7 @@ export default function BookView() {
               <Divider />
               <Comments />
               <Divider />
-              <NewComment />
+              <NewComment bookId={book.id} />
             </Grid>
           </Grid>
         ) : (

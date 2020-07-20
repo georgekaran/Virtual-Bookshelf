@@ -1,16 +1,26 @@
-import React from 'react'
+import React from 'react';
+import { useSelector } from 'react-redux';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers';
 import { Box, Typography, Button } from '@material-ui/core'
 import { useForm } from 'react-hook-form'
 
 import Input from '../Form/Input/Input'
+import { RootState } from '../../protocols/root-state';
+import { Comment } from '../../protocols';
+import { randomId } from '../../util/utils';
+import Api from '../../util/api/api';
 
 const NewCommentSchema = Yup.object().shape({
   comment: Yup.string().required('Required field')
 });
 
-export default function NewComment() {
+interface NewCommentProps {
+  bookId: string
+}
+
+const NewComment: React.FC<NewCommentProps> = ({ bookId }) => {
+  const user = useSelector((state: RootState) => state.user);
 
   const newCommentForm = useForm({
     resolver: yupResolver(NewCommentSchema),
@@ -21,7 +31,18 @@ export default function NewComment() {
   const { isValid } = newCommentForm.formState;
 
   const handleSubmit = (values: any) => {
-    console.log(values);
+    const { comment } = values
+
+    const commentToSave: Comment = {
+      id: randomId(),
+      parentId: bookId,
+      timestamp: Date.now(),
+      body: comment,
+      author: user.id,
+      deleted: false
+    }
+
+    Api.Comment.save(commentToSave);
   }
 
   return (
@@ -45,3 +66,5 @@ export default function NewComment() {
     </Box>
   )
 }
+
+export default NewComment;

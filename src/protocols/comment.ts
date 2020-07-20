@@ -3,7 +3,6 @@ export interface Comment {
   parentId: string
   timestamp: number
   body: string
-  description: string
   author: string
   deleted: boolean
 }
