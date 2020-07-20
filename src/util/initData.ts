@@ -6,22 +6,22 @@ const categoriesDefaultData = [
   {
     id: null,
     name: 'others',
-    title: 'Sem categoria',
+    title: 'No category',
   },
   {
     id: '1',
     name: 'reading',
-    title: 'Lendo',
+    title: 'Reading',
   },
   {
     id: '2',
     name: 'wantToRead',
-    title: 'Quero ler',
+    title: 'Want to read',
   },
   {
     id: '3',
     name: 'read',
-    title: 'Lidos',
+    title: 'Read',
   },
 ];
 
