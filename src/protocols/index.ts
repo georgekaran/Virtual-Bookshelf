@@ -1,5 +1,6 @@
 export * from './book'
 export * from './category'
+export * from './comment'
 export * from './option'
 export * from './entity'
 export * from './endpoint'

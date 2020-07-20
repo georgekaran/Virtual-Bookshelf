@@ -1,8 +1,8 @@
 import isEmpty from 'lodash/isEmpty';
 
-import { Category, Entity, Endpoint, Book } from '../../protocols';
+import { Category, Comment, Entity, Endpoint, Book } from '../../protocols';
 import { initDataApi } from '../initData';
-import { categoryKey, bookKey } from '../consts';
+import { categoryKey, bookKey, commentsKey } from '../consts';
 
 type LocalStorageKeys = '_virtual_bookshelf_category' | '_virtual_bookshelf_book' | '_virtual_bookshelf_comments';
 
@@ -62,6 +62,12 @@ class CategoryRepository extends BaseEndpoint<Category> {
   }
 }
 
+class CommentRepository extends BaseEndpoint<Comment> {
+  constructor() {
+    super(commentsKey)
+  }
+}
+
 class BookRepository extends BaseEndpoint<Book> {
   constructor() {
     super(bookKey)
@@ -75,6 +81,7 @@ class BookRepository extends BaseEndpoint<Book> {
 class Api {
   public static Category = new CategoryRepository()
   public static Book = new BookRepository()
+  public static Comment = new CommentRepository()
 }
 
 export default Api;
