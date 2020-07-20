@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Typography, Divider } from '@material-ui/core';
+import { Box, Typography } from '@material-ui/core';
 
 import Comment from '../Comment/Comment';
 
