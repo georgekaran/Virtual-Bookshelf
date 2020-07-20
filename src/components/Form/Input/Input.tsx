@@ -4,20 +4,23 @@ import { FormControl, InputLabel, Input as InputMUI, FormHelperText } from '@mat
 import isEmpty from 'lodash/isEmpty'
 
 interface InputProps {
-  label: string;
+  label?: string;
   name: string;
   form: UseFormMethods;
+  showLabel?: boolean
   [T: string]: any
 }
 
-const Input: React.FC<InputProps> = ({ label, name, form, ...props }) => {
+const Input: React.FC<InputProps> = ({ label, name, form, showLabel = true, ...props }) => {
   const { control, errors } = form;
 
   return (
     <FormControl className="Input">
-      <InputLabel shrink htmlFor={name}>
-        {label}
-      </InputLabel>
+      {showLabel && (
+        <InputLabel shrink htmlFor={name}>
+          {label}
+        </InputLabel>
+      )}
       <Controller
         name={name}
         control={control}
