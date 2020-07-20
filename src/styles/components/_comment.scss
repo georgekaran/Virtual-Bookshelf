@@ -1,0 +1,25 @@
+.CommentWrapper {
+  margin-bottom: 16px;
+
+  & {
+    .UserInfo {
+      font-weight: 600;
+      font-size: 16px;
+      color: #5B5B5B;
+      padding: 0 8px;
+    }
+
+    .CommentDate {
+      font-weight: normal;
+      font-size: 14px;
+      color: #A5A5A5;
+    }
+
+    .CommentValue {
+      margin-left: 48px;
+      font-weight: normal;
+      font-size: 14px;
+      color: #5B5B5B;
+    }
+  }
+}

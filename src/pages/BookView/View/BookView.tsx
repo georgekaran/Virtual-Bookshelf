@@ -27,6 +27,7 @@ import { Book, Category, Option } from '../../../protocols';
 import Api from '../../../util/api/api';
 import { dataURLToFile } from '../../../util/utils';
 import Select from '../../../components/Form/Select/Select';
+import Comments from '../../../components/Comments/Comments';
 
 interface BookViewHeaderProps {
   handleEditClick: () => void
@@ -162,7 +163,7 @@ export default function BookView() {
                         handleDeleteClick={handleDeleteClick} />
         <Divider />
         {book ? (
-          <Grid container xs>
+          <Grid container xs className="BookInfo">
             <Grid className="ImageWrapper" 
                   item 
                   xs={6}>
@@ -197,6 +198,10 @@ export default function BookView() {
                 <Typography className="Label__Value">{book.description}</Typography>
               </Box>
             </Grid>
+            <Grid item xs>
+              <Divider />
+              <Comments />
+            </Grid>
           </Grid>
         ) : (
           <h5>Title</h5>
@@ -207,7 +212,6 @@ export default function BookView() {
         <form onSubmit={formCategory.handleSubmit(handleCategorySubmit)}>
           <DialogTitle id="form-dialog-title">Change Book Category</DialogTitle>
           <DialogContent>
-            
               <Select label="New category" 
                       name="category"
                       displayEmpty 
