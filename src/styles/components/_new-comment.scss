@@ -1,0 +1,9 @@
+.NewCommentWrapper {
+  margin: 16px 0;
+  & {
+    textarea {
+      padding: 16px 16px !important;
+    }
+  } 
+} 
+  
