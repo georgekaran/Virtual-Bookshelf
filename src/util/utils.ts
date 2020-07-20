@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 export function getBase64(file: File) {
   return new Promise<string>((resolve, reject) => {
     const reader = new FileReader();
@@ -22,6 +24,14 @@ export function dataURLToFile(dataurl: string): File | null {
     return new File([u8arr], 'file', {type:mime});
   }
   return null
+}
+
+export function timestampToStringDate(timestamp: number) {
+  try {
+    return moment(timestamp).format('DD/MM/YYYY, hh:mm');
+  } catch (e) {
+    return timestamp;
+  }
 }
 
 
