@@ -14,7 +14,11 @@ export default function NewComment() {
 
   const newCommentForm = useForm({
     resolver: yupResolver(NewCommentSchema),
+    mode: "onChange",
+    reValidateMode: "onChange"
   });
+
+  const { isValid } = newCommentForm.formState;
 
   const handleSubmit = (values: any) => {
     console.log(values);
@@ -23,7 +27,7 @@ export default function NewComment() {
   return (
     <Box className="NewCommentWrapper">
       <form onSubmit={newCommentForm.handleSubmit(handleSubmit)}>
-        <Typography className="Title">Post a new comment</Typography>
+        <Typography className="Section__Title">Post a new comment</Typography>
         <Input name="comment" 
               form={newCommentForm} 
               showLabel={false}
@@ -32,7 +36,8 @@ export default function NewComment() {
               rows={4} />
         <Box display="flex" justifyContent="flex-end">
           <Button className="BtnPrimary" 
-                  type="submit">
+                  type="submit"
+                  disabled={!isValid}>
             Post comment
           </Button>
         </Box>
