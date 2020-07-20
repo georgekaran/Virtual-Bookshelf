@@ -1,9 +1,13 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { MoreVert, ArrowBack } from '@material-ui/icons';
+import { ArrowBack } from '@material-ui/icons';
 import { Box, Typography, IconButton } from '@material-ui/core';
 
-export default function BodyHeader() {
+interface BodyHeaderProps {
+
+}
+
+const BodyHeader: React.FC<BodyHeaderProps> = ({ children }) => {
   const history = useHistory()
 
   const handlePreviousRoute = () => {
@@ -18,9 +22,9 @@ export default function BodyHeader() {
           Back
         </Typography>
       </IconButton>
-      <IconButton component="span" onClick={handlePreviousRoute}>
-        <MoreVert />
-      </IconButton>
+      {children}
     </Box>
   )
 }
+
+export default BodyHeader;
