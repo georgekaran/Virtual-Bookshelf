@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers';
 import { Box, Typography, Button } from '@material-ui/core'
@@ -10,6 +10,7 @@ import { RootState } from '../../protocols/root-state';
 import { CommentModel } from '../../protocols';
 import { randomId } from '../../util/utils';
 import Api from '../../util/api/api';
+import { addComment } from '../../actions/commentsActions';
 
 const NewCommentSchema = Yup.object().shape({
   comment: Yup.string().required('Required field')
@@ -21,13 +22,13 @@ interface NewCommentProps {
 
 const NewComment: React.FC<NewCommentProps> = ({ bookId }) => {
   const user = useSelector((state: RootState) => state.user);
+  const dispatch = useDispatch();
 
   const newCommentForm = useForm({
     resolver: yupResolver(NewCommentSchema),
     mode: "onChange",
     reValidateMode: "onChange"
   });
-
   const { isValid } = newCommentForm.formState;
 
   const handleSubmit = (values: any) => {
@@ -43,6 +44,7 @@ const NewComment: React.FC<NewCommentProps> = ({ bookId }) => {
     }
 
     Api.Comment.save(commentToSave);
+    dispatch(addComment(commentToSave))
   }
 
   return (
