@@ -47,7 +47,7 @@ export default function BookList({ category, showButtonMore = true, limit = -1 }
   useEffect(updateCardsLimit, [width])
 
   useEffect(() => {
-    let tempBooksFiltered = books.filter(book => book.title.includes(search));
+    let tempBooksFiltered = books.filter(book => book.title.toLowerCase().includes(search.toLowerCase()));
     switch (sortName) {
       case SORT_ALPHABETICALLY:
         tempBooksFiltered = sortAlphabetically<BookModel>("title", tempBooksFiltered);
