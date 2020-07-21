@@ -24,14 +24,14 @@ abstract class BaseEndpoint<T extends Entity> implements Endpoint<T> {
   find(id: string) {
     let data = getEndpointData(this.key);
     if (!isEmpty(data)) {
-      return data.find((c) => c.id === id) as T;
+      return data.find((c) => c.id === id && !c.deleted) as T;
     }
     return null;
   }
 
   findAll() {
     let data = getEndpointData(this.key);
-    return data as T[];
+    return data.filter(d => !d.deleted) as T[];
   }
 
   save(entity: T) {
@@ -51,7 +51,9 @@ abstract class BaseEndpoint<T extends Entity> implements Endpoint<T> {
 
   delete(entity: T) {
     let data = getEndpointData(this.key);
+    entity.deleted = true;
     const newData = data.filter(t => t.id !== entity.id);
+    newData.push(entity)
     setEndpointData(this.key, newData);
   }
 }
