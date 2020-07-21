@@ -7,6 +7,7 @@
 
 // Colors
 $primary: #713BDB;
+$secondary: #fff;
 
 .Base__Container {
   padding: 24px;
@@ -15,6 +16,10 @@ $primary: #713BDB;
 // Buttons
 .BtnPrimary {
   background: $primary !important;
+
+  &.secondary {
+    background: $secondary !important;
+  }
 
   &.Mui-disabled {
     background: #bfaae8 !important;
@@ -26,6 +31,30 @@ $primary: #713BDB;
     font-style: normal;
     font-weight: bold;
     font-size: 13px;
+  }
+
+  &.secondary > .MuiButton-label {
+    color: $primary;
+  }
+}
+
+.BtnSecondary {
+  background: $secondary !important;
+
+  &.Mui-disabled {
+    background: #bfaae8 !important;
+  }
+
+  & > .MuiButton-label {
+    padding: 6px;
+    color: $primary;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 13px;
+  }
+
+  & > .MuiButton-label {
+    color: $primary;
   }
 }
 
