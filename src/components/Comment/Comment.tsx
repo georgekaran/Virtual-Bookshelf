@@ -46,7 +46,13 @@ const Comment: React.FC<CommentProps> = ({ comment }) => {
     reValidateMode: "onChange"
   });
 
+  const resetForm = () => {
+    editCommentForm.reset({ comment: "" });
+  }
+
   const handleEditSubmit = (values: any) => {
+    resetForm();
+
     const newComment: CommentModel = { ...comment, body: values.comment };
     Api.Comment.save(newComment);
     dispatch(addComment(newComment));

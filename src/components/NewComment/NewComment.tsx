@@ -31,7 +31,13 @@ const NewComment: React.FC<NewCommentProps> = ({ bookId }) => {
   });
   const { isValid } = newCommentForm.formState;
 
-  const handleSubmit = (values: any) => {
+  const resetForm = () => {
+    newCommentForm.reset({ comment: "" });
+  }
+
+  const handleSubmit = (values: any, e: any) => {
+    resetForm();
+    
     const { comment } = values
 
     const commentToSave: CommentModel = {
@@ -44,7 +50,7 @@ const NewComment: React.FC<NewCommentProps> = ({ bookId }) => {
     }
 
     Api.Comment.save(commentToSave);
-    dispatch(addComment(commentToSave))
+    dispatch(addComment(commentToSave));
   }
 
   return (
