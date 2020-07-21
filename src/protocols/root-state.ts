@@ -5,4 +5,5 @@ export interface RootState {
   user: User
   comments: CommentModel[]
   search: string
+  sort: string
 }
