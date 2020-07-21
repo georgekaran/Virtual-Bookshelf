@@ -6,6 +6,7 @@ import Search from '../../components/Search/Search';
 import BookList from '../../components/BookList/BookList';
 import { CategoryModel } from '../../protocols';
 import Api from '../../util/api/api';
+import BodyHeader from '../../components/BodyHeader/BodyHeader';
 
 export default function CategoryView() {
   const [category, setCategory] = useState<CategoryModel>()
@@ -42,6 +43,7 @@ export default function CategoryView() {
   return (
     <Container fixed className={`Base__Container ${category?.name}`}>
       <Grid item xs={12}>
+        <BodyHeader />
         {category && (
           <>
             <Search title={title} />
