@@ -12,6 +12,8 @@ import Select from '../../../components/Form/Select/Select';
 import Api from '../../../util/api/api'
 import { Option, BookModel } from '../../../protocols';
 import { getBase64, randomId, dataURLToFile } from '../../../util/utils';
+import ToastSuccess from '../../../components/Toast/ToastSuccess';
+import ToastError from '../../../components/Toast/ToastError';
 
 const FormBookSchema = Yup.object().shape({
   title: Yup.string().required('Required field'),
@@ -31,6 +33,15 @@ export default function FormBook() {
     resolver: yupResolver(FormBookSchema),
   });
   const { reset } = form;
+  
+  const resetForm = () => {
+    reset({
+      title: "",
+      author: "",
+      description: "",
+      category: null
+    })
+  };
 
   const categoriesToOptions = () => {
     const categories = Api.Category.findAll();
@@ -66,18 +77,26 @@ export default function FormBook() {
   useEffect(fetchBookAndUpdateFormValues, [id, reset])
 
   const handleSubmit = async (values: any) => {
-    const book: BookModel = {
-      id: id ? id : randomId(),
-      author: values.author,
-      category: values.category,
-      title: values.title,
-      description: values.description,
-      deleted: false,
-      timestamp: Date.now(),
-      image: image ? await getBase64(image) : null
-    }
+    try {
+      const book: BookModel = {
+        id: id ? id : randomId(),
+        author: values.author,
+        category: values.category,
+        title: values.title,
+        description: values.description,
+        deleted: false,
+        timestamp: Date.now(),
+        image: image ? await getBase64(image) : null
+      }
+  
+      Api.Book.save(book);
+      ToastSuccess("Book saved successfully");
 
-    Api.Book.save(book);
+      resetForm();
+    } catch (e) {
+      ToastError("Erro while tryng to save book");
+      console.error(e);
+    }
   };
 
   return (
