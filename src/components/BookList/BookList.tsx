@@ -58,7 +58,7 @@ export default function BookList({ category, showButtonMore = true, limit = -1 }
         </Typography>
         {showButtonMore && books.length > 0 && (
           <Button endIcon={<ArrowForwardIcon />} color="primary" onClick={handleSeeMoreClick}>
-            Ver mais
+            See more
           </Button>
         )}
       </Box>

@@ -24,16 +24,16 @@ export default function CategoryView() {
   useEffect(() => {
     switch (category?.name) {
       case "read":
-        setTitle("Opa, aqui estão seus livros já lidos.")
+        setTitle("Here are your books already read.")
         break;
       case "reading":
-        setTitle("Estes livros você está lendo no momento.")
+        setTitle("These books you are currently reading.")
         break;
       case "wantToRead":
-        setTitle("Abaixo estão os livros que você deseja ler.")
+        setTitle("Below are the books you want to read.")
         break;
       default:
-          setTitle("Livros que não estão em nehuma categoria")
+          setTitle("Books that are not in any category.")
         break;
     }
   }, [category])

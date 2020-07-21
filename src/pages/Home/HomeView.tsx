@@ -18,7 +18,7 @@ export default function Home() {
   return (
     <Container fixed className="Base__Container">
       <Grid item xs={12}>
-        <Search title={"Encontre os melhores livros em cada categoria"} />
+        <Search title={"Find the best books in each category."} />
         {categories.map((category) => (
           <BookList key={category.name}
                     category={category}

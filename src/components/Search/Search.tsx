@@ -21,7 +21,7 @@ export default function Search({ title }: SearchProps) {
         <h3>{title}</h3>
         <Input
           className="Search__Input"
-          placeholder="Busque por livros"
+          placeholder="Search for books"
           disableUnderline
           endAdornment={
             <InputAdornment position="end">

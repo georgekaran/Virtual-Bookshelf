@@ -23,7 +23,7 @@ export default function Header() {
           <Box className="ActionsWrapper">
             <Button className="BtnPrimary" 
                     onClick={handleNewBookClick}>
-              Adicionar livro
+              Add book
             </Button>
             <Avatar className="Avatar" 
                     alt="Awesome user" 
