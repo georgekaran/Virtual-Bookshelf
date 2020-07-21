@@ -8,12 +8,13 @@ import { Container, Grid, Box, Typography, Button } from '@material-ui/core';
 import Dropzone from '../../../components/Dropzone/Dropzone';
 import Input from '../../../components/Form/Input/Input';
 import Select from '../../../components/Form/Select/Select';
+import ToastSuccess from '../../../components/Toast/ToastSuccess';
+import ToastError from '../../../components/Toast/ToastError';
+import BodyHeader from '../../../components/BodyHeader/BodyHeader';
 
 import Api from '../../../util/api/api'
 import { Option, BookModel } from '../../../protocols';
 import { getBase64, randomId, dataURLToFile } from '../../../util/utils';
-import ToastSuccess from '../../../components/Toast/ToastSuccess';
-import ToastError from '../../../components/Toast/ToastError';
 
 const FormBookSchema = Yup.object().shape({
   title: Yup.string().required('Required field'),
@@ -100,9 +101,10 @@ export default function FormBook() {
   };
 
   return (
-    <Container className={`Form__Container`}
+    <Container className={`Base__Container Form__Container`}
                fixed>
-      <Grid item xs>
+      <Grid item xs className="ContainerShadow">
+        <BodyHeader />
         <form onSubmit={form.handleSubmit(handleSubmit)}>
           <Box className="Box">
             <Typography variant="h4" 
