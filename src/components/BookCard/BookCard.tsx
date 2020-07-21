@@ -29,10 +29,16 @@ const BookCard: React.FC<BookCardProps> = ({ book }) => {
         <>
           <img src={book.image || noImageSvg} alt="Book Cover" />
           <div className="InfoWrapper">
-            <Typography className="Title" component="label">
+            <Typography className="Title" 
+                        component="label"
+                        title={book.title}
+                        noWrap={true}>
               {book.title}
             </Typography>
-            <Typography className="Author" component="label">
+            <Typography className="Author" 
+                        component="label"
+                        title={book.author}
+                        noWrap={true}>
               {book.author}
             </Typography>
           </div>
