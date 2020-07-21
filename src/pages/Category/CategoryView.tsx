@@ -10,16 +10,17 @@ import Api from '../../util/api/api';
 export default function CategoryView() {
   const [category, setCategory] = useState<CategoryModel>()
   const [title, setTitle] = useState("")
-  const { categoryId } = useParams();
+  const { categoryName } = useParams();
 
   const findCategory = () => {
     const categories = Api.Category.findAll()
-    const currentCategory = categories.find(c => c.id === categoryId);
+    const currentCategory = categories.find(c => c.name === categoryName);
+
     if (currentCategory)
       setCategory(currentCategory);
   }
 
-  useEffect(findCategory, [categoryId])
+  useEffect(findCategory, [categoryName])
 
   useEffect(() => {
     switch (category?.name) {
