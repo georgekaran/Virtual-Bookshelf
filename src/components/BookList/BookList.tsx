@@ -13,6 +13,7 @@ import { SORT_ALPHABETICALLY, SORT_DATE_ASC, SORT_DATE_DESC } from '../../action
 import sortAlphabetically from '../../sort/sortAlphabetically';
 import sortDateAsc from '../../sort/sortDateAsc';
 import sortDateDesc from '../../sort/sortDateDesc';
+import Empty from '../Empty/Empty';
 
 interface BookListProps {
   category: CategoryModel;
@@ -86,7 +87,7 @@ export default function BookList({ category, showButtonMore = true, limit = -1 }
           </Button>
         )}
       </Box>
-      <Grid container spacing={3}>
+      <Grid className="Relative" container spacing={3}>
         {booksFiltered.length === 0 ? (
           <>
             {new Array(6).fill(0).map((_, idx) => (
@@ -96,6 +97,7 @@ export default function BookList({ category, showButtonMore = true, limit = -1 }
                 <BookCard book={null} />
               </Grid>
             ))}
+            <Empty />
           </>
         ) : (
           <>

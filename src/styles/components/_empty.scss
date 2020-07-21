@@ -1,0 +1,23 @@
+.Empty {
+  background-color: white;
+  position: absolute;
+  width: 300px;
+  border-radius: 4px;
+  padding: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #e2e2e2;
+
+  & {
+    img {
+      max-height: 150px;
+      object-fit: scale-down;
+      margin-bottom: 16px;
+    }
+  }
+}
