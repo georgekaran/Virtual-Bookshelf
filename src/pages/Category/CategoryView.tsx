@@ -7,6 +7,7 @@ import BookList from '../../components/BookList/BookList';
 import { CategoryModel } from '../../protocols';
 import Api from '../../util/api/api';
 import BodyHeader from '../../components/BodyHeader/BodyHeader';
+import LoadingPulse from '../../components/Loading/Loading';
 
 export default function CategoryView() {
   const [category, setCategory] = useState<CategoryModel>()
@@ -44,12 +45,14 @@ export default function CategoryView() {
     <Container fixed className={`Base__Container ${category?.name}`}>
       <Grid item xs={12}>
         <BodyHeader />
-        {category && (
+        {category ? (
           <>
             <Search title={title} />
             <BookList category={category}
                       showButtonMore={false} />
           </>
+        ) : (
+          <LoadingPulse />
         )}
       </Grid>
     </Container>
