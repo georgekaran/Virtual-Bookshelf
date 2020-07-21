@@ -9,6 +9,10 @@ import BookCard from '../BookCard/BookCard';
 import { CategoryModel, BookModel } from '../../protocols';
 import Api from '../../util/api/api';
 import { RootState } from '../../protocols/root-state';
+import { SORT_ALPHABETICALLY, SORT_DATE_ASC, SORT_DATE_DESC } from '../../actions/sortActions';
+import sortAlphabetically from '../../sort/sortAlphabetically';
+import sortDateAsc from '../../sort/sortDateAsc';
+import sortDateDesc from '../../sort/sortDateDesc';
 
 interface BookListProps {
   category: CategoryModel;
@@ -24,6 +28,7 @@ export default function BookList({ category, showButtonMore = true, limit = -1 }
   const  history = useHistory();
   const { width } = useWindowSize();
   const search = useSelector((state: RootState) => state.search);
+  const sortName = useSelector((state: RootState) => state.sort);
 
   const fetchBooks = () => {
     const booksCategory = Api.Book.findByCategory(category.id);
@@ -42,8 +47,24 @@ export default function BookList({ category, showButtonMore = true, limit = -1 }
   useEffect(updateCardsLimit, [width])
 
   useEffect(() => {
-    setBooksFiltered(books.filter(book => book.title.includes(search)));
-  }, [search, books])
+    let tempBooksFiltered = books.filter(book => book.title.includes(search));
+    console.log(sortName);
+    switch (sortName) {
+      case SORT_ALPHABETICALLY:
+        console.log("caiu aqui")
+        tempBooksFiltered = sortAlphabetically<BookModel>("title", tempBooksFiltered);
+        break;
+      case SORT_DATE_ASC:
+        tempBooksFiltered = sortDateAsc<BookModel>("timestamp", tempBooksFiltered);
+        break;
+      case SORT_DATE_DESC:
+        tempBooksFiltered = sortDateDesc<BookModel>("timestamp", tempBooksFiltered);
+        break;
+    }
+    
+    console.log(tempBooksFiltered);
+    setBooksFiltered(tempBooksFiltered);
+  }, [search, books, sortName])
 
   const isShowingThreeCards = () => {
     return limitCards === 3
