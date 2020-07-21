@@ -7,21 +7,25 @@ const categoriesDefaultData = [
     id: null,
     name: 'others',
     title: 'No category',
+    deleted: false,
   },
   {
     id: '1',
     name: 'reading',
     title: 'Reading',
+    deleted: false,
   },
   {
     id: '2',
     name: 'wantToRead',
     title: 'Want to read',
+    deleted: false,
   },
   {
     id: '3',
     name: 'read',
     title: 'Read',
+    deleted: false,
   },
 ];
 
