@@ -8,10 +8,11 @@ interface InputProps {
   name: string;
   form: UseFormMethods;
   showLabel?: boolean
+  defaultValue?: any
   [T: string]: any
 }
 
-const Input: React.FC<InputProps> = ({ label, name, form, showLabel = true, ...props }) => {
+const Input: React.FC<InputProps> = ({ label, name, form, showLabel = true, defaultValue, ...props }) => {
   const { control, errors } = form;
 
   return (
@@ -24,6 +25,7 @@ const Input: React.FC<InputProps> = ({ label, name, form, showLabel = true, ...p
       <Controller
         name={name}
         control={control}
+        defaultValue={defaultValue}
         as={<InputMUI id={name} 
                       disableUnderline 
                       aria-describedby={`${name}-helper`} 
