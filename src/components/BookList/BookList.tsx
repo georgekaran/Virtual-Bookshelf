@@ -38,16 +38,11 @@ export default function BookList({ category, showButtonMore = true, limit = -1 }
 
   useEffect(updateCardsLimit, [width])
 
-  useEffect(() => {
-    console.log(books);
-  }, [books]);
-
   const isShowingThreeCards = () => {
     return limitCards === 3
   }
 
   const booksArray = (): BookModel[] => {
-    console.log(books, limit, limitCards)
     return limitCards === -1 ? books : books.slice(0, limitCards);
   }
 
@@ -70,8 +65,10 @@ export default function BookList({ category, showButtonMore = true, limit = -1 }
       <Grid container spacing={3}>
         {books.length === 0 ? (
           <>
-            {new Array(6).fill(0).map(() => (
-              <Grid item xs={isShowingThreeCards() ? 4 : 2}>
+            {new Array(6).fill(0).map((_, idx) => (
+              <Grid key={idx} 
+                    item 
+                    xs={isShowingThreeCards() ? 4 : 2}>
                 <BookCard book={null} />
               </Grid>
             ))}
@@ -79,7 +76,9 @@ export default function BookList({ category, showButtonMore = true, limit = -1 }
         ) : (
           <>
             {booksArray().map((book) => (
-              <Grid key={book.id} item xs={isShowingThreeCards() ? 4 : 2}>
+              <Grid key={book.id} 
+                    item 
+                    xs={isShowingThreeCards() ? 4 : 2}>
                 <BookCard book={book} />
               </Grid>
             ))}

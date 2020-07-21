@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers';
 import { useForm } from 'react-hook-form';
@@ -19,7 +19,8 @@ import {
   DialogTitle, 
   DialogContent,
   DialogActions, 
-  Button } from '@material-ui/core';
+  Button, 
+  DialogContentText} from '@material-ui/core';
 
 import noImageSvg from '../../../assets/images/no-image.svg';
 import BodyHeader from '../../../components/BodyHeader/BodyHeader';
@@ -29,6 +30,8 @@ import { dataURLToFile, timestampToStringDate } from '../../../util/utils';
 import Select from '../../../components/Form/Select/Select';
 import Comments from '../../../components/Comments/Comments';
 import NewComment from '../../../components/NewComment/NewComment';
+import ToastSuccess from '../../../components/Toast/ToastSuccess';
+import ToastError from '../../../components/Toast/ToastError';
 
 interface BookViewHeaderProps {
   handleEditClick: () => void
@@ -96,6 +99,7 @@ export default function BookView() {
   const [isCategoryDialogOpen, setCategoryDialogOpen] = useState(false);
 
   const { id } = useParams();
+  const history = useHistory();
 
   const formCategory = useForm({
     resolver: yupResolver(CategorySchema),
@@ -131,10 +135,21 @@ export default function BookView() {
   useEffect(categoriesToOptions, [])
 
   const handleEditClick = () => {
+    history.push(`/book/${book?.id}`)
   }
 
   const handleDeleteClick = () => {
-    // TODO
+    try {
+      if (book) {
+        Api.Book.delete(book);
+        ToastSuccess("Book deleted successfully");
+        history.push('/');
+      }
+      handleCategoryDialogClickOpen();
+    } catch (e) {
+      ToastError("Error while trying to delete book");
+      console.error(e);
+    }
   }
 
   const fetchBook = () => {
@@ -160,10 +175,11 @@ export default function BookView() {
   return (
     <Container fixed className="Base__Container">
       <Grid item xs className="BodyView">
-        <BookViewHeader handleEditClick={handleEditClick}
-                        handleDeleteClick={handleDeleteClick} />
-        <Divider />
         {book ? (
+          <>
+          <BookViewHeader handleEditClick={() => handleEditClick()}
+                          handleDeleteClick={() => handleDeleteClick()} />
+          <Divider />
           <Grid container className="BookInfo">
             <Grid className="ImageWrapper" 
                   item 
@@ -207,6 +223,7 @@ export default function BookView() {
               <NewComment bookId={book.id} />
             </Grid>
           </Grid>
+          </>
         ) : (
           <h5>Title</h5>
         )}
@@ -232,6 +249,26 @@ export default function BookView() {
                     color="primary" 
                     onClick={handleCategoryDialogClose} >
               Save
+            </Button>
+          </DialogActions>
+        </form>
+      </Dialog>
+
+      <Dialog open={isCategoryDialogOpen} onClose={handleCategoryDialogClose} aria-labelledby="form-dialog-title">
+        <form onSubmit={formCategory.handleSubmit(handleCategorySubmit)}>
+          <DialogTitle id="form-dialog-title">Delete book</DialogTitle>
+          <DialogContent>
+              <DialogContentText>Are you sure you want to delete this book?</DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button color="primary" 
+                    onClick={handleCategoryDialogClose}>
+              Cancel
+            </Button>
+            <Button type="submit"
+                    color="primary" 
+                    onClick={handleCategoryDialogClose} >
+              Delete
             </Button>
           </DialogActions>
         </form>
