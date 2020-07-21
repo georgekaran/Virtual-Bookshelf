@@ -48,10 +48,8 @@ export default function BookList({ category, showButtonMore = true, limit = -1 }
 
   useEffect(() => {
     let tempBooksFiltered = books.filter(book => book.title.includes(search));
-    console.log(sortName);
     switch (sortName) {
       case SORT_ALPHABETICALLY:
-        console.log("caiu aqui")
         tempBooksFiltered = sortAlphabetically<BookModel>("title", tempBooksFiltered);
         break;
       case SORT_DATE_ASC:
@@ -61,8 +59,6 @@ export default function BookList({ category, showButtonMore = true, limit = -1 }
         tempBooksFiltered = sortDateDesc<BookModel>("timestamp", tempBooksFiltered);
         break;
     }
-    
-    console.log(tempBooksFiltered);
     setBooksFiltered(tempBooksFiltered);
   }, [search, books, sortName])
 

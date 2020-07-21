@@ -23,10 +23,6 @@ const Comments: React.FC<CommentsProps> = ({ bookId }) => {
 
   useEffect(fetchComments, [bookId])
 
-  useEffect(() => {
-    console.log(comments)
-  }, [comments])
-
   return (
     <Box className="CommentsWrapper">
       <Typography className="Title">Comments({comments.length})</Typography>
