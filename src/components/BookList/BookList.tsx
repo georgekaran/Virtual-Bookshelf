@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import isEmpty from 'lodash/isEmpty';
 import { useWindowSize } from 'react-use';
 import { Grid, Box, Typography, Button } from '@material-ui/core';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
@@ -18,7 +17,7 @@ interface BookListProps {
 export default function BookList({ category, showButtonMore = true, limit = -1 }: BookListProps) {
   const { width } = useWindowSize();
   const [limitCards, setLimitCards] = useState(limit);
-  const [books, setBooks] = useState<BookModel[]>();
+  const [books, setBooks] = useState<BookModel[]>([]);
   let history = useHistory();
 
   const fetchBooks = () => {
@@ -47,6 +46,11 @@ export default function BookList({ category, showButtonMore = true, limit = -1 }
     return limitCards === 3
   }
 
+  const booksArray = (): BookModel[] => {
+    console.log(books, limit, limitCards)
+    return limitCards === -1 ? books : books.slice(0, limitCards);
+  }
+
   const handleSeeMoreClick = () => {
     history.push(`/category/${category.id}`);
   };
@@ -57,16 +61,16 @@ export default function BookList({ category, showButtonMore = true, limit = -1 }
         <Typography className="Title" component="h4">
           {category.title}
         </Typography>
-        {showButtonMore && (
+        {showButtonMore && books.length > 0 && (
           <Button endIcon={<ArrowForwardIcon />} color="primary" onClick={handleSeeMoreClick}>
             Ver mais
           </Button>
         )}
       </Box>
       <Grid container spacing={3}>
-        {isEmpty(books) ? (
+        {books.length === 0 ? (
           <>
-            {new Array(limitCards).fill(0).map(() => (
+            {new Array(6).fill(0).map(() => (
               <Grid item xs={isShowingThreeCards() ? 4 : 2}>
                 <BookCard book={null} />
               </Grid>
@@ -74,7 +78,7 @@ export default function BookList({ category, showButtonMore = true, limit = -1 }
           </>
         ) : (
           <>
-            {books?.slice(0, limitCards).map((book) => (
+            {booksArray().map((book) => (
               <Grid key={book.id} item xs={isShowingThreeCards() ? 4 : 2}>
                 <BookCard book={book} />
               </Grid>

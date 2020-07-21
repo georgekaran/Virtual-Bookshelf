@@ -186,7 +186,8 @@ export default function BookView() {
               <Box display="flex" marginY="8px" alignItems="center">
                 <Typography className="Label__Text">Category: </Typography>
                 <Typography className="Label__Value">{category && category.title}</Typography>
-                <IconButton onClick={handleCategoryDialogClickOpen}>
+                <IconButton className="EditIcon" 
+                            onClick={handleCategoryDialogClickOpen}>
                   <Edit fontSize="small" />
                 </IconButton>
               </Box>

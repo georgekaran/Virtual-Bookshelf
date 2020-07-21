@@ -12,7 +12,7 @@
     }
 
     .InfoWrapper {
-      padding: 16px 0;
+      padding: 16px 0px 16px 16px;
 
       & {
         .Title {
@@ -22,13 +22,21 @@
           margin-bottom: 8px;
         }
 
+        .EditIcon {
+          padding: 0px !important;
+          margin-left: 12px;
+        }
+
         .Label__Text {
           margin-right: 8px;
           font-weight: 500;
+          align-self: baseline;
         }
 
         .Label__Value {
           color: #3c3c3c;
+          max-height: 350px;
+          overflow: auto;
         }
       }
     }
