@@ -6,7 +6,7 @@ import { Search as SearchIcon, Sort as SortIcon } from '@material-ui/icons';
 import searchImage from '../../assets/images/search-image.svg';
 import { RootState } from '../../protocols/root-state';
 import { setSearch } from '../../actions/searchActions';
-import { setSortAlphabetically, setSortDateAsc, setSortDateDesc } from '../../actions/sortActions';
+import { setSortAlphabetically, setSortDateAsc, setSortDateDesc, SORT_ALPHABETICALLY, SORT_DATE_ASC, SORT_DATE_DESC } from '../../actions/sortActions';
 
 interface SearchProps {
   title: string;
@@ -17,6 +17,7 @@ export default function Search({ title }: SearchProps) {
 
   const dispatch = useDispatch();
   const search = useSelector((state: RootState) => state.search);
+  const sort = useSelector((state: RootState) => state.sort);
 
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
     dispatch(setSearch(e.target.value));
@@ -79,9 +80,9 @@ export default function Search({ title }: SearchProps) {
             open={Boolean(anchorEl)}
             onClose={handleSortClose}
           >
-            <MenuItem onClick={dispatchSortAlphabetically}>Sort Alphabetically</MenuItem>
-            <MenuItem onClick={dispatchSortDateAsc}>Sort creation date (ASC)</MenuItem>
-            <MenuItem onClick={dispatchSortDateDesc}>Sort creation date (DESC)</MenuItem>
+            <MenuItem className={`${sort === SORT_ALPHABETICALLY && 'Highlight'}`} onClick={dispatchSortAlphabetically}>Sort Alphabetically</MenuItem>
+            <MenuItem className={`${sort === SORT_DATE_ASC && 'Highlight'}`} onClick={dispatchSortDateAsc}>Sort creation date (ASC)</MenuItem>
+            <MenuItem className={`${sort === SORT_DATE_DESC && 'Highlight'}`} onClick={dispatchSortDateDesc}>Sort creation date (DESC)</MenuItem>
           </Menu>
         </Box>
       </Grid>

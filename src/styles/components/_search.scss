@@ -5,6 +5,11 @@
   border-radius: 8px;
 
   & {
+    .Highlight {
+      background: #604dc7;
+      color: white;
+    }
+
     h3 {
       font-style: normal;
       font-weight: bold;
