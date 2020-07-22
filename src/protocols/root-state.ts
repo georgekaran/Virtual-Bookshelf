@@ -6,4 +6,5 @@ export interface RootState {
   comments: CommentModel[]
   search: string
   sort: string
+  isLoading: boolean
 }
