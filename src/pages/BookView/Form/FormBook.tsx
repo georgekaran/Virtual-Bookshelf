@@ -59,7 +59,6 @@ export default function FormBook() {
   }, [])
 
   const fetchBookAndUpdateFormValues = () => {
-    console.log(id);
     if (id) {
       const book = Api.Book.find(id);
       if (book && !book.deleted) {
