@@ -21,7 +21,7 @@ interface BookListProps {
   limit?: number;
 }
 
-export default function BookList({ category, showButtonMore = true, limit = -1 }: BookListProps) {
+export default function BookList({ category, showButtonMore = true, limit = 50 }: BookListProps) {
   const [limitCards, setLimitCards] = useState(limit);
   const [books, setBooks] = useState<BookModel[]>([]);
   const [booksFiltered, setBooksFiltered] = useState<BookModel[]>([]);
@@ -90,7 +90,7 @@ export default function BookList({ category, showButtonMore = true, limit = -1 }
       <Grid className="Relative" container spacing={3}>
         {booksFiltered.length === 0 ? (
           <>
-            {new Array(6).fill(0).map((_, idx) => (
+            {new Array(limitCards).fill(0).map((_, idx) => (
               <Grid key={idx} 
                     item 
                     xs={isShowingThreeCards() ? 4 : 2}>

@@ -13,6 +13,8 @@
 
       & .BookCover {
         max-height: 550px;
+        object-fit: scale-down;
+        width: 100%;
       }
     }
 
