@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers';
 import { Container, Grid, Box, Typography, Button } from '@material-ui/core';
@@ -15,6 +16,7 @@ import BodyHeader from '../../../components/BodyHeader/BodyHeader';
 import Api from '../../../util/api/api'
 import { Option, BookModel } from '../../../protocols';
 import { getBase64, randomId, dataURLToFile } from '../../../util/utils';
+import { setLoading } from '../../../actions/loadingActions';
 
 const FormBookSchema = Yup.object().shape({
   title: Yup.string().required('Required field'),
@@ -29,7 +31,7 @@ export default function FormBook() {
   const [book, setBook] = useState<BookModel | null>();
 
   const { id } = useParams();
-
+  const dispatch = useDispatch();
   const form = useForm({
     resolver: yupResolver(FormBookSchema),
   });
@@ -79,6 +81,9 @@ export default function FormBook() {
 
   const handleSubmit = async (values: any) => {
     try {
+      dispatch(setLoading(true));
+      await new Promise(resolve => setTimeout(resolve, 3000));
+
       const book: BookModel = {
         id: id ? id : randomId(),
         author: values.author,
@@ -97,6 +102,8 @@ export default function FormBook() {
     } catch (e) {
       ToastError("Erro while tryng to save book");
       console.error(e);
+    } finally {
+      dispatch(setLoading(false));
     }
   };
 

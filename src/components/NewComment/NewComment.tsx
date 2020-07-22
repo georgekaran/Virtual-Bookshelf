@@ -11,6 +11,7 @@ import { CommentModel } from '../../protocols';
 import { randomId } from '../../util/utils';
 import Api from '../../util/api/api';
 import { addComment } from '../../actions/commentsActions';
+import { setLoading } from '../../actions/loadingActions';
 
 const NewCommentSchema = Yup.object().shape({
   comment: Yup.string().required('Required field')
@@ -35,22 +36,30 @@ const NewComment: React.FC<NewCommentProps> = ({ bookId }) => {
     newCommentForm.reset({ comment: "" });
   }
 
-  const handleSubmit = (values: any, e: any) => {
-    resetForm();
-    
-    const { comment } = values
+  const handleSubmit = async (values: any, e: any) => {
+    try {
+      dispatch(setLoading(true));
+      await new Promise(resolve => setTimeout(resolve, 1000));
 
-    const commentToSave: CommentModel = {
-      id: randomId(),
-      parentId: bookId,
-      timestamp: Date.now(),
-      body: comment,
-      author: user.id,
-      deleted: false
+      resetForm();
+      const { comment } = values
+
+      const commentToSave: CommentModel = {
+        id: randomId(),
+        parentId: bookId,
+        timestamp: Date.now(),
+        body: comment,
+        author: user.id,
+        deleted: false
+      }
+  
+      Api.Comment.save(commentToSave);
+      dispatch(addComment(commentToSave));
+    } catch (e) {
+      console.error(e);
+    } finally {
+      dispatch(setLoading(false));
     }
-
-    Api.Comment.save(commentToSave);
-    dispatch(addComment(commentToSave));
   }
 
   return (

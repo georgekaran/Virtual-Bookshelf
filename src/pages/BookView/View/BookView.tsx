@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers';
 import { useForm } from 'react-hook-form';
@@ -32,6 +33,7 @@ import Comments from '../../../components/Comments/Comments';
 import NewComment from '../../../components/NewComment/NewComment';
 import ToastSuccess from '../../../components/Toast/ToastSuccess';
 import ToastError from '../../../components/Toast/ToastError';
+import { setLoading } from '../../../actions/loadingActions';
 
 interface BookViewHeaderProps {
   handleEditClick: () => void
@@ -97,9 +99,11 @@ export default function BookView() {
   const [category, setCategory] = useState<CategoryModel>();
   const [categoriesOptions, setCategoriesOptions] = useState<Option[]>([]);
   const [isCategoryDialogOpen, setCategoryDialogOpen] = useState(false);
+  const [isDelelteDialogOpen, setDeleteDialogOpen] = useState(false);
 
   const { id } = useParams();
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const formCategory = useForm({
     resolver: yupResolver(CategorySchema),
@@ -111,6 +115,14 @@ export default function BookView() {
 
   const handleCategoryDialogClose = () => {
     setCategoryDialogOpen(false);
+  };
+
+  const handleDeleteDialogClickOpen = () => {
+    setDeleteDialogOpen(true);
+  };
+
+  const handleDeleteDialogClose = () => {
+    setDeleteDialogOpen(false);
   };
 
   const handleCategorySubmit = async (values: any) => {
@@ -138,17 +150,22 @@ export default function BookView() {
     history.push(`/book/${book?.id}`)
   }
 
-  const handleDeleteClick = () => {
+  const handleDeleteClick = async () => {
     try {
+      dispatch(setLoading(true));
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      handleDeleteDialogClose();
+
       if (book) {
         Api.Book.delete(book);
         ToastSuccess("Book deleted successfully");
         history.push('/');
       }
-      handleCategoryDialogClickOpen();
     } catch (e) {
       ToastError("Error while trying to delete book");
       console.error(e);
+    } finally {
+      dispatch(setLoading(false));
     }
   }
 
@@ -178,7 +195,7 @@ export default function BookView() {
         {book ? (
           <>
           <BookViewHeader handleEditClick={() => handleEditClick()}
-                          handleDeleteClick={() => handleDeleteClick()} />
+                          handleDeleteClick={() => handleDeleteDialogClickOpen()} />
           <Divider />
           <Grid container className="BookInfo">
             <Grid className="ImageWrapper" 
@@ -254,7 +271,7 @@ export default function BookView() {
         </form>
       </Dialog>
 
-      <Dialog open={isCategoryDialogOpen} onClose={handleCategoryDialogClose} aria-labelledby="form-dialog-title">
+      <Dialog open={isDelelteDialogOpen} onClose={handleDeleteDialogClose} aria-labelledby="form-dialog-title">
         <form onSubmit={formCategory.handleSubmit(handleCategorySubmit)}>
           <DialogTitle id="form-dialog-title">Delete book</DialogTitle>
           <DialogContent>
@@ -262,12 +279,11 @@ export default function BookView() {
           </DialogContent>
           <DialogActions>
             <Button color="primary" 
-                    onClick={handleCategoryDialogClose}>
+                    onClick={handleDeleteDialogClose}>
               Cancel
             </Button>
-            <Button type="submit"
-                    color="primary" 
-                    onClick={handleCategoryDialogClose} >
+            <Button color="primary" 
+                    onClick={handleDeleteClick} >
               Delete
             </Button>
           </DialogActions>

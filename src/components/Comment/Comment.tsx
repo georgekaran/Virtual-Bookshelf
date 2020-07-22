@@ -23,6 +23,7 @@ import { RootState } from '../../protocols/root-state';
 import { deleteComment, addComment } from '../../actions/commentsActions';
 import Api from '../../util/api/api';
 import Input from '../Form/Input/Input';
+import { setLoading } from '../../actions/loadingActions';
 
 interface CommentProps {
   comment: CommentModel
@@ -50,13 +51,23 @@ const Comment: React.FC<CommentProps> = ({ comment }) => {
     editCommentForm.reset({ comment: "" });
   }
 
-  const handleEditSubmit = (values: any) => {
-    resetForm();
+  const handleEditSubmit = async (values: any) => {
+    try {
+      dispatch(setLoading(true));
+      await new Promise(resolve => setTimeout(resolve, 1000));
 
-    const newComment: CommentModel = { ...comment, body: values.comment };
-    Api.Comment.save(newComment);
-    dispatch(addComment(newComment));
-    setEditMode(false);
+      resetForm();
+
+      const newComment: CommentModel = { ...comment, body: values.comment };
+      Api.Comment.save(newComment);
+      dispatch(addComment(newComment));
+      setEditMode(false);
+
+    } catch (e) {
+      console.error(e);
+    } finally {
+      dispatch(setLoading(false));
+    }
   }
 
   const handleDeleteDialogClickOpen = () => {
@@ -80,12 +91,19 @@ const Comment: React.FC<CommentProps> = ({ comment }) => {
     setEditMode(true)
   }
 
-  const handleDeleteComment = () => {
-    if (comment) {
-      Api.Comment.delete(comment);
-      dispatch(deleteComment(comment))
+  const handleDeleteComment = async () => {
+    try {
+      dispatch(setLoading(true));
+      await new Promise(resolve => setTimeout(resolve, 1000));
+
+      if (comment) {
+        Api.Comment.delete(comment);
+        dispatch(deleteComment(comment))
+      }
+    } finally {
+      dispatch(setLoading(false));
+      handleDeleteDialogClose();
     }
-    handleDeleteDialogClose();
   }
 
   return (
@@ -129,7 +147,6 @@ const Comment: React.FC<CommentProps> = ({ comment }) => {
         </Typography>
       )}
       
-
       <Dialog open={isDeleteDialogOpen} onClose={handleDeleteDialogClose} aria-labelledby="form-dialog-title">
         {comment && (
           <>
