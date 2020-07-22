@@ -42,7 +42,8 @@
 
         .Label__Value {
           color: #3c3c3c;
-          max-height: 350px;
+          max-height: 200px;
+          word-break: break-all;
           overflow: auto;
         }
       }
