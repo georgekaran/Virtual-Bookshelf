@@ -8,6 +8,7 @@ import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
 import store from './store/store';
 import App from './router/Router'
 import { initDataApi } from './util/initData';
+import LoadingPulse from './components/Loading/Loading';
 
 const theme = createMuiTheme({
   palette: {
@@ -27,6 +28,7 @@ ReactDOM.render(
     <Provider store={store}>
       <ThemeProvider theme={theme}>
         <App />
+        <LoadingPulse />
       </ThemeProvider>
     </Provider>
   </React.StrictMode>,
